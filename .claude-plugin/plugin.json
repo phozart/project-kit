@@ -5,8 +5,5 @@
   "author": {
     "name": "Phozart"
   },
-  "license": "MIT",
-  "agents": "./agents/",
-  "skills": "./skills/",
-  "commands": "./commands/"
+  "license": "MIT"
 }
