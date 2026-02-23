@@ -1,0 +1,39 @@
+{
+  "name": "project-kit",
+  "owner": {
+    "name": "Phozart"
+  },
+  "metadata": {
+    "description": "Multi-agent project orchestration for software development",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "project-kit",
+      "description": "Complete multi-agent project orchestration for software development. Covers product design, business analysis, architecture, UX/UI, implementation, testing, QA, security, documentation, and release.",
+      "source": "./",
+      "skills": [
+        "./skills/api-design",
+        "./skills/architecture",
+        "./skills/architecture-maintenance",
+        "./skills/business-analysis",
+        "./skills/data-modeling",
+        "./skills/deployment",
+        "./skills/documentation",
+        "./skills/implementation-auth",
+        "./skills/implementation-database",
+        "./skills/implementation-java",
+        "./skills/implementation-nextjs",
+        "./skills/implementation-python",
+        "./skills/implementation-react",
+        "./skills/product-design",
+        "./skills/project-init",
+        "./skills/qa-review",
+        "./skills/sprint-management",
+        "./skills/techstack-config",
+        "./skills/testing",
+        "./skills/ux-ui-design"
+      ]
+    }
+  ]
+}
