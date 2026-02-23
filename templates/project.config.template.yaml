@@ -1,0 +1,87 @@
+project:
+  name: ""
+  description: ""
+  type: ""  # data-pipeline | api-service | web-app | full-stack | library | etl | analytics | ml-pipeline
+  created: ""
+
+phases:
+  innovation: false
+  marketing: false
+  product_design: true
+  business_analysis: true
+  architecture: true
+  ux_ui: true
+  implementation: true
+  qa_security: true
+  release: true
+  documentation: true
+
+gates:
+  mode: mixed
+  overrides:
+    gate_0_setup: manual
+    gate_1_innovation: auto
+    gate_2_product_design: auto
+    gate_3_marketing: skip
+    gate_4_requirements: auto
+    gate_5_architecture: auto
+    gate_6_design: auto
+    gate_7_implementation: auto
+    gate_8_qa_security: auto
+    gate_9_release: manual
+    gate_10_documentation: auto
+
+techstack:
+  language: ""
+  language_version: ""
+  runtime: ""
+  frontend:
+    framework: ""
+    styling: ""
+    state: ""
+    testing: ""
+  backend:
+    framework: ""
+    orm: ""
+    testing: ""
+  data:
+    database_primary: ""
+    database_cache: ""
+    message_queue: ""
+    orchestrator: ""
+    processing: ""
+    storage_format: ""
+  infrastructure:
+    containerization: ""
+    ci_cd: ""
+    cloud: ""
+    iac: ""
+  auth:
+    method: ""
+    provider: ""
+  api:
+    style: ""
+    doc_format: ""
+
+commands:
+  build: ""
+  test: ""
+  lint: ""
+  format: ""
+  dev: ""
+
+workflow:
+  current_phase: setup
+  phases_completed: []
+  current_gate: 0
+  gates_passed: []
+
+requirements:
+  total: 0
+  implemented: 0
+  tested: 0
+
+sprints:
+  current: 0
+  features_in_progress: []
+  features_completed: []

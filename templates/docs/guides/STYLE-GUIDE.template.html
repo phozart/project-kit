@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[PROJECT_NAME] - Style Guide</title>
+    <style>
+        body {
+            font-family: [FONT_FAMILY];
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: [TEXT_COLOR];
+        }
+        h1, h2, h3 { color: [HEADING_COLOR]; }
+        .color-palette { display: flex; flex-wrap: wrap; gap: 20px; }
+        .color-swatch {
+            width: 150px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .typography-sample { margin: 20px 0; }
+        .component-example {
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>[PROJECT_NAME] Style Guide</h1>
+        <p><strong>Version:</strong> [VERSION] | <strong>Date:</strong> [DATE]</p>
+    </header>
+
+    <section id="brand">
+        <h2>Brand Identity</h2>
+        <p>[BRAND_DESCRIPTION]</p>
+    </section>
+
+    <section id="colors">
+        <h2>Color Palette</h2>
+
+        <h3>Primary Colors</h3>
+        <div class="color-palette">
+            <div class="color-swatch" style="background-color: [PRIMARY_COLOR]; color: [TEXT_ON_PRIMARY];">
+                <strong>[COLOR_NAME]</strong><br>
+                [HEX_CODE]
+            </div>
+            <div class="color-swatch" style="background-color: [SECONDARY_COLOR]; color: [TEXT_ON_SECONDARY];">
+                <strong>[COLOR_NAME]</strong><br>
+                [HEX_CODE]
+            </div>
+        </div>
+
+        <h3>Semantic Colors</h3>
+        <div class="color-palette">
+            <div class="color-swatch" style="background-color: [SUCCESS_COLOR]; color: white;">
+                <strong>Success</strong><br>
+                [HEX_CODE]
+            </div>
+            <div class="color-swatch" style="background-color: [WARNING_COLOR]; color: white;">
+                <strong>Warning</strong><br>
+                [HEX_CODE]
+            </div>
+            <div class="color-swatch" style="background-color: [ERROR_COLOR]; color: white;">
+                <strong>Error</strong><br>
+                [HEX_CODE]
+            </div>
+        </div>
+    </section>
+
+    <section id="typography">
+        <h2>Typography</h2>
+
+        <div class="typography-sample">
+            <h1>Heading 1 - [FONT_SIZE] / [FONT_WEIGHT]</h1>
+            <h2>Heading 2 - [FONT_SIZE] / [FONT_WEIGHT]</h2>
+            <h3>Heading 3 - [FONT_SIZE] / [FONT_WEIGHT]</h3>
+            <h4>Heading 4 - [FONT_SIZE] / [FONT_WEIGHT]</h4>
+            <p>Body text - [FONT_SIZE] / [FONT_WEIGHT]</p>
+            <small>Small text - [FONT_SIZE] / [FONT_WEIGHT]</small>
+        </div>
+
+        <h3>Font Stack</h3>
+        <pre><code>font-family: [FONT_FAMILY];</code></pre>
+    </section>
+
+    <section id="spacing">
+        <h2>Spacing</h2>
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Token</th>
+                <th>Value</th>
+                <th>Usage</th>
+            </tr>
+            <tr>
+                <td>[SPACING_XS]</td>
+                <td>[VALUE]</td>
+                <td>[USAGE]</td>
+            </tr>
+            <tr>
+                <td>[SPACING_SM]</td>
+                <td>[VALUE]</td>
+                <td>[USAGE]</td>
+            </tr>
+            <tr>
+                <td>[SPACING_MD]</td>
+                <td>[VALUE]</td>
+                <td>[USAGE]</td>
+            </tr>
+            <tr>
+                <td>[SPACING_LG]</td>
+                <td>[VALUE]</td>
+                <td>[USAGE]</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="components">
+        <h2>Components</h2>
+
+        <h3>Buttons</h3>
+        <div class="component-example">
+            <button style="[PRIMARY_BUTTON_STYLES]">[PRIMARY_BUTTON_TEXT]</button>
+            <button style="[SECONDARY_BUTTON_STYLES]">[SECONDARY_BUTTON_TEXT]</button>
+        </div>
+        <pre><code>[BUTTON_CODE_EXAMPLE]</code></pre>
+
+        <h3>Forms</h3>
+        <div class="component-example">
+            <label for="example-input">[LABEL_TEXT]</label>
+            <input type="text" id="example-input" placeholder="[PLACEHOLDER]" style="[INPUT_STYLES]">
+        </div>
+        <pre><code>[FORM_CODE_EXAMPLE]</code></pre>
+
+        <h3>Cards</h3>
+        <div class="component-example">
+            <div style="[CARD_STYLES]">
+                <h3>[CARD_TITLE]</h3>
+                <p>[CARD_CONTENT]</p>
+            </div>
+        </div>
+        <pre><code>[CARD_CODE_EXAMPLE]</code></pre>
+    </section>
+
+    <section id="icons">
+        <h2>Icons</h2>
+        <p><strong>Icon Library:</strong> [ICON_LIBRARY]</p>
+        <p><strong>Style:</strong> [ICON_STYLE]</p>
+        <p><strong>Sizes:</strong> [ICON_SIZES]</p>
+    </section>
+
+    <section id="grid">
+        <h2>Grid System</h2>
+        <p><strong>Columns:</strong> [COLUMN_COUNT]</p>
+        <p><strong>Gutter:</strong> [GUTTER_SIZE]</p>
+        <p><strong>Breakpoints:</strong></p>
+        <ul>
+            <li>Mobile: [MOBILE_BREAKPOINT]</li>
+            <li>Tablet: [TABLET_BREAKPOINT]</li>
+            <li>Desktop: [DESKTOP_BREAKPOINT]</li>
+        </ul>
+    </section>
+
+    <section id="accessibility">
+        <h2>Accessibility</h2>
+        <ul>
+            <li><strong>Standard:</strong> [WCAG_LEVEL]</li>
+            <li><strong>Minimum Contrast Ratio:</strong> [CONTRAST_RATIO]</li>
+            <li><strong>Focus Indicators:</strong> [FOCUS_STYLE]</li>
+            <li><strong>Keyboard Navigation:</strong> [KEYBOARD_SUPPORT]</li>
+        </ul>
+    </section>
+
+    <footer style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <p>&copy; [YEAR] [PROJECT_NAME]. All rights reserved.</p>
+    </footer>
+</body>
+</html>
