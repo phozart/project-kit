@@ -5,14 +5,8 @@ description: >
   Triggers: "implement authentication", "setup auth", "implement oauth", "create jwt auth",
   "implement rbac", "setup authorization". Uses implementation-auth skill.
   Covers OAuth2, JWT, session, API key depending on config. Sets up middleware, guards, token management.
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+model: opus
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Auth Developer Agent

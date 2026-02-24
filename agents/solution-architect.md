@@ -6,7 +6,7 @@ description: >
   making technology decisions, defining contracts, or documenting architectural decisions.
   Triggered by keywords: architecture, ADR, contracts, system design, infrastructure.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Solution Architect Agent

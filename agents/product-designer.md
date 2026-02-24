@@ -6,7 +6,7 @@ description: >
   product strategy, personas, user journeys, feature inventory, and MVP scope.
   Use when starting product design or when user says "design the product".
 model: opus
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Product Designer Agent

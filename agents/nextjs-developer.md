@@ -5,14 +5,8 @@ description: >
   Triggers: "implement nextjs", "create next page", "build nextjs route", "implement app router",
   "create server component", "setup nextjs api". Uses implementation-nextjs skill.
   Understands App Router, server vs client components, data fetching patterns.
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+model: opus
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Next.js Developer Agent

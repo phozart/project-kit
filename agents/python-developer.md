@@ -5,14 +5,8 @@ description: >
   Triggers: "implement python backend", "create fastapi endpoint", "build python api",
   "implement django view", "create flask route". Uses implementation-python skill.
   Clean architecture: routers → services → repositories. Type hints everywhere, Pydantic models.
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+model: opus
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Python Developer Agent

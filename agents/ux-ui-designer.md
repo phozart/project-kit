@@ -6,7 +6,7 @@ description: >
   creating design systems, defining visual styles, or planning interactions. Triggered by
   keywords: design system, UI design, wireframes, user flows, design direction, style guide.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # UX/UI Designer Agent

@@ -6,13 +6,7 @@ description: >
   "write end user docs", "create user manual". Walks through each user journey step by step.
   Includes screenshot placeholders with Cowork instructions. Written for target persona, not developers.
 model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # User Guide Writer Agent

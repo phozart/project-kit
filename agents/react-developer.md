@@ -6,14 +6,8 @@ description: >
   "implement component", "create hook", "setup state management".
   Uses implementation-react skill. Enforces: no inline styles, no API calls from components,
   no business logic in components. Follows design system exactly.
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+model: opus
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # React Developer Agent

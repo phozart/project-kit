@@ -6,7 +6,7 @@ description: >
   Use when generating visual design documentation. Triggered by keywords: style guide,
   design documentation, visual reference.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Style Guide Generator Agent

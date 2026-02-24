@@ -6,7 +6,7 @@ description: >
   changelog updates, version bumps, deployment configuration. Use when
   preparing for production release.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Release Manager Agent

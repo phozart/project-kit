@@ -6,7 +6,7 @@ description: >
   guide (end-user documentation). Ensures all three are consistent and complete.
   Use when generating or updating documentation.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep, Task]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Documentation Writer Agent

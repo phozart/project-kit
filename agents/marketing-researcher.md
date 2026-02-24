@@ -6,7 +6,7 @@ description: >
   phases.marketing is true. Can run in parallel with business analysis. Use
   when market understanding is needed.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Marketing Researcher Agent

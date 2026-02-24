@@ -5,14 +5,8 @@ description: >
   Triggers: "implement database", "create migration", "write database query", "setup database schema",
   "optimize query", "create seed data". Uses implementation-database skill.
   Reads DATA-MODEL.md and TYPE-CONTRACTS for schema. Produces migrations, seed data, indexes.
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+model: opus
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Database Developer Agent

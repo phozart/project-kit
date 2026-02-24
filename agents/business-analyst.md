@@ -6,7 +6,7 @@ description: >
   acceptance criteria. Creates Requirements Traceability Matrix. Also conducts
   Business Acceptance Testing before release. Use when defining requirements.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Business Analyst Agent

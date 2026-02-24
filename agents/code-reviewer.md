@@ -5,7 +5,7 @@ description: >
   error handling, test coverage, and coding standards. Use during Phase 8 QA
   or when user says "review the code", "code review".
 model: sonnet
-tools: [Read, Bash, Glob, Grep]
+tools: Read, Bash, Glob, Grep
 ---
 
 # Code Reviewer

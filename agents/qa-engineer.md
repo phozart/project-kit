@@ -6,7 +6,7 @@ description: >
   Use when testing full system, validating integrations, or performing E2E tests. Triggered
   by keywords: QA, testing, integration test, E2E test, test plan, data quality.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # QA Engineer Agent

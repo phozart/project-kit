@@ -6,7 +6,7 @@ description: >
   XSS, CSRF, and more. Cannot modify code. Use when performing security reviews or audits.
   Triggered by keywords: security review, security audit, vulnerabilities, OWASP.
 model: sonnet
-tools: [Read, Bash, Glob, Grep]
+tools: Read, Bash, Glob, Grep
 ---
 
 # Security Reviewer Agent

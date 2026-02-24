@@ -5,14 +5,8 @@ description: >
   Triggers: "implement api endpoint", "create api route", "implement rest api", "build api",
   "implement openapi spec". Uses api-design skill. Works across backend frameworks.
   Ensures every operationId in API-CONTRACTS has implementation. Validates request/response shapes.
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+model: opus
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # API Developer Agent

@@ -6,7 +6,7 @@ description: >
   agents, validates outputs, and handles phase transitions. Use when starting a
   new project or managing existing project phases.
 model: opus
-tools: [Read, Write, Edit, Bash, Glob, Grep, Task]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Project Lead Agent

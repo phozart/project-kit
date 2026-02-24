@@ -7,7 +7,7 @@ description: >
   progress, updates RTM with implementation references. Use when starting
   implementation or managing sprints.
 model: opus
-tools: [Read, Write, Edit, Bash, Glob, Grep, Task]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Sprint Coordinator Agent

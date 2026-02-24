@@ -6,7 +6,7 @@ description: >
   phases.innovation is true in project.config.yaml. Use when starting from a
   vague idea that needs validation.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Innovation Strategist Agent

@@ -5,14 +5,8 @@ description: >
   Triggers: "implement java backend", "create spring boot endpoint", "build java api",
   "implement spring controller", "create spring service". Uses implementation-java skill.
   Controller → Service → Repository → Entity pattern. Records for DTOs, constructor injection.
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+model: opus
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Java Developer Agent

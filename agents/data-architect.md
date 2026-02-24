@@ -6,7 +6,7 @@ description: >
   schemas, creating entity relationships, or specifying data contracts. Triggered by
   keywords: data model, ERD, schema, database design, entity relationships.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Data Architect Agent

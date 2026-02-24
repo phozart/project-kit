@@ -6,7 +6,7 @@ description: >
   techstack details, and setup instructions. Use when generating developer documentation.
   Triggered by keywords: dev guide, developer documentation, technical documentation.
 model: sonnet
-tools: [Read, Write, Edit, Bash, Glob, Grep]
+tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Developer Guide Generator Agent
