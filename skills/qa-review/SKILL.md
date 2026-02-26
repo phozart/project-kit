@@ -1,242 +1,245 @@
 ---
 name: qa-review
-description: System-level quality validation with parallel QA, security, and code reviews
+description: Quality validation at work package level (incremental) and system level (Phase 8). Connects to implementation thinking, performance contracts, and product failure modes.
 ---
 
-# QA Review Skill
+# QA Review
 
-System-level quality validation skill for Phase 8. Coordinates three parallel reviews: QA Engineer (system testing), Security Reviewer (OWASP + vulnerabilities), and Code Reviewer (standards compliance).
+## Two Levels of QA
 
-## Overview
+### Level 1: Work Package QA (During Implementation)
 
-QA review validates the complete system before release. Unlike unit/integration testing during implementation, QA review focuses on system-level quality, security, and compliance.
+Runs after every work package's BUILD stage. Scope: only the work package's changed code and features.
 
-**Three Parallel Reviews:**
-1. **QA Engineer** — System testing, user journey validation, performance
-2. **Security Reviewer** — OWASP Top 10, vulnerability scanning, security best practices
-3. **Code Reviewer** — Contract compliance, code quality, error handling, test coverage
+This is embedded in the work package lifecycle (see sprint-coordinator). The QA skill provides the criteria and methods for this level.
+
+### Level 2: System QA (Phase 8)
+
+Runs after ALL work packages are complete. Scope: the entire integrated system.
+
+Phase 8 is NOT re-testing features (that happened at Level 1). Phase 8 validates:
+- Cross-work-package integration (features built in WP-1 still work after WP-4 was added)
+- System-level performance under realistic load
+- Security across the full attack surface
+- End-to-end user journeys that span multiple work packages
+- Regression: nothing built later broke something built earlier
+
+## Level 1: Work Package QA
+
+### Automated Test Stage (TEST)
+
+Run after all tasks in a work package complete. Automated, no human judgment.
+
+Checklist:
+- [ ] All unit tests pass (written during BUILD alongside code)
+- [ ] All integration tests pass
+- [ ] Linting: zero errors
+- [ ] Type checking: zero errors
+- [ ] Contract compliance: implementations match TYPE-CONTRACTS and API-CONTRACTS
+- [ ] Performance contract tests pass (from implementation notes)
+
+If any automated check fails -> identify which task(s) caused the failure -> return to BUILD -> fix -> re-run TEST.
+
+### Code Review Stage (CODE REVIEW)
+
+Review the code produced in this work package only. Read-only review, no code changes.
+
+Checklist:
+- [ ] Implementation notes exist for each task (5 questions answered)
+- [ ] Code matches the interaction pattern identified in implementation notes
+- [ ] Performance contract decisions actually implemented (indexes created, caching configured, not deferred)
+- [ ] No scope creep (code only does what the task brief specifies)
+- [ ] Security basics: input validation, auth checks, no exposed secrets
+- [ ] Error handling: errors are caught, logged, and surfaced to the user appropriately
+- [ ] No hardcoded values that should be configurable
+- [ ] Code is readable without the implementation notes (someone new could understand it)
+
+Severity classification:
+- **Critical**: security vulnerability, data loss risk, auth bypass -> blocks, return to BUILD
+- **High**: missing validation, unhandled error that crashes, contract deviation -> blocks, return to BUILD
+- **Medium**: missing index (performance risk), hardcoded value, missing test -> logged, fix in this WP or defer to Polish WP
+- **Low**: naming convention, comment quality, minor refactor opportunity -> logged, defer to Polish WP
+
+### QA Review Stage (QA REVIEW)
+
+Functional testing against acceptance criteria. Human-assisted, not purely automated.
+
+Process:
+1. Read the work package brief's acceptance criteria
+2. For each criterion: verify it works as specified
+3. Read the edge cases for each task in the package
+4. For each edge case: verify the behavior is correct
+5. Test the interaction BETWEEN tasks in the package (do they work together?)
+6. Test failure scenarios: what happens when things go wrong?
+
+```markdown
+## WP-1 QA Review: Dispatch Management
+
+### Acceptance Criteria Verification
+| Criterion | Result | Notes |
+|-----------|--------|-------|
+| Create dispatch with all fields | PASS | |
+| List dispatches with pagination | PASS | |
+| View dispatch detail | PASS | |
+| Edit dispatch | PASS | |
+| Delete dispatch (soft delete, Draft only) | PASS | |
+
+### Edge Case Verification
+| Edge Case | Result | Notes |
+|-----------|--------|-------|
+| Empty item count defaults to 0 | PASS | |
+| 10,000+ records loads in <2s | PASS | 1.3s measured |
+| Delete dispatch with items shows warning | FAIL | Warning text missing item count |
+| Edit closed dispatch shows "closed" message | PASS | |
+| Concurrent edit: last-write-wins with warning | NOT TESTED | Need two browser sessions |
+
+### Cross-Task Integration
+| Interaction | Result | Notes |
+|-------------|--------|-------|
+| Create -> appears in list | PASS | |
+| Edit from detail -> list reflects change | PASS | |
+| Delete from list -> detail returns 404 | PASS | |
+
+### Failure Scenarios
+| Scenario | Expected | Actual | Result |
+|----------|----------|--------|--------|
+| Create with server down | Error message | 500 error page | FAIL |
+| Edit after session expires | Redirect to login | Silent failure | FAIL |
+```
+
+Defects from QA REVIEW return to BUILD with specific information: what was tested, what the expected behavior was, what actually happened.
+
+### Human Verify Stage (HUMAN VERIFY)
+
+The user (not the QA agent) tests the work package. The work package brief includes a specific verify prompt.
+
+This is NOT a checklist. It's a real person using the feature and reporting what they experience. The QA skill supports this by providing the verify prompt and a simple feedback template:
+
+```markdown
+## Human Verification: WP-1
+
+### Verify Prompt
+Open the app. Create three dispatches with different data. Go to the list — are they there?
+Open one — is the detail correct? Edit it — does the change persist?
+Try to break it. Tell me what happened.
+
+### Feedback
+[User writes freeform feedback here]
+
+### Triage
+| Feedback Item | Type | Action |
+|---------------|------|--------|
+| [from user feedback] | Bug / Enhancement / Cosmetic / Design Gap | [task fix / defer / escalate to product design] |
+```
+
+## Level 2: System QA (Phase 8)
+
+Phase 8 runs after all work packages have passed their individual QA cycles.
+
+### What Phase 8 Tests That Level 1 Doesn't
+
+**Cross-Work-Package Integration**
+
+Each work package was tested in isolation. Phase 8 tests that they work together:
+- Features from WP-1 still function after WP-2, WP-3, WP-4 were added
+- Shared state (auth, navigation, filters) works consistently across all features
+- Data created in one feature appears correctly in another
+- Navigation between features built in different work packages is seamless
+
+Test method: Run every user journey end-to-end. A user journey typically spans features from multiple work packages.
+
+**System Performance Under Realistic Load**
+
+Work package performance tests used isolated benchmarks. Phase 8 tests under realistic conditions:
+- Multiple features active simultaneously
+- Realistic number of concurrent users
+- Realistic data volumes across all entities
+- Background jobs running alongside user traffic
+
+Test method: Load testing with realistic user scenarios, not synthetic benchmarks.
+
+**Security Across Full Attack Surface**
+
+Work package security checks were scoped. Phase 8 tests the complete attack surface:
+- OWASP Top 10 validation across all endpoints
+- Dependency vulnerability scan (full dependency tree)
+- Auth/authz testing across all features (privilege escalation attempts)
+- Session management across feature boundaries
+- Input validation on every user-facing input in the system
+
+Test method: Combination of automated scanning (OWASP ZAP, dependency audit) and manual testing of auth boundaries.
+
+**Regression**
+
+The most important Phase 8 activity. Did building WP-4 break something from WP-1?
+
+Test method: Re-run all work package TEST suites (automated tests from every WP). If any fail, a regression was introduced. Identify which WP introduced it, fix, and re-run.
+
+### Phase 8 Process
+
+```
+1. REGRESSION RUN
+   - Execute all automated tests from all work packages
+   - If any fail -> identify regression -> fix -> re-run
+   - All green -> proceed
+
+2. INTEGRATION JOURNEYS
+   - Execute end-to-end user journeys that span multiple work packages
+   - Document any journey that doesn't complete correctly
+   - Fix -> re-test journey
+
+3. SYSTEM PERFORMANCE
+   - Load test with realistic concurrent usage
+   - Compare against performance contracts from implementation notes
+   - Flag any endpoint or feature that exceeds its performance budget under load
+   - Fix or document with mitigation plan
+
+4. SECURITY SCAN
+   - Run automated security scanning (OWASP ZAP, dependency audit)
+   - Manual auth boundary testing
+   - Document findings by severity
+   - Critical/High -> fix before release
+   - Medium -> fix or accept with documented risk
+   - Low -> document, defer
+
+5. SYSTEM QA SIGN-OFF
+   - All regression tests pass
+   - All integration journeys complete
+   - Performance under load meets contracts
+   - No critical/high security findings open
+   - Release candidate approved or blocked with specific blockers
+```
+
+### Phase 8 Output
+
+```
+docs/qa/
+  REGRESSION-RESULTS.md          -- All-WP test suite results
+  INTEGRATION-JOURNEYS.md        -- End-to-end journey test results
+  PERFORMANCE-REPORT.md          -- Load test results vs. performance contracts
+  SECURITY-REPORT.md             -- Scan results + manual findings
+  SYSTEM-QA-SIGN-OFF.md          -- Approved / Blocked with reasons
+```
+
+### Phase 8 Is Fast If Work Packages Were Thorough
+
+The point of embedded QA in work packages is that Phase 8 should find very little. If work package QA was done well:
+- Regression tests are already written and passing
+- Features are already individually verified
+- Performance contracts are already validated per-feature
+- Security basics are already reviewed per-work-package
+
+Phase 8 catches only what falls between the cracks: integration issues, cumulative performance degradation, and security gaps that only appear when the full system is assembled.
+
+If Phase 8 finds major issues, the problem isn't Phase 8. It's that work package QA was too shallow. The fix is improving Level 1, not making Phase 8 more comprehensive.
 
 ## When to Use
 
 Use this skill when:
-- Entering Phase 8 QA review
+- During work package TEST, CODE REVIEW, or QA REVIEW stages (Level 1)
+- Entering Phase 8 system QA (Level 2)
 - User asks to "run QA review" or "check quality"
 - Before release preparation
-- Validating system-level quality
-- After sprint completion
-
-## QA Review Process
-
-### Phase 8 Entry Criteria
-- All Phase 7 sprint work completed
-- Implementation complete (all features done)
-- Unit and integration tests passing
-- Requirements Traceability Matrix updated
-- System deployed to QA environment
-
-### Parallel Review Streams
-
-**Stream 1: QA Engineer**
-- Execute system test plan
-- Validate user journeys end-to-end
-- Verify requirements traceability
-- Test cross-functional scenarios
-- Validate data flows
-- Performance and load testing
-
-**Stream 2: Security Reviewer**
-- OWASP Top 10 validation
-- Dependency vulnerability scanning
-- Authentication/authorization testing
-- Input validation and sanitization
-- Secrets management audit
-- PII/sensitive data handling
-- XSS, CSRF, SQL injection testing
-
-**Stream 3: Code Reviewer**
-- Contract compliance verification
-- Code quality and standards
-- Error handling patterns
-- Test coverage analysis
-- Documentation completeness
-- Performance patterns
-
-### Defect Management
-
-**Defect Severity Levels:**
-- **Critical** — System crash, data loss, security breach
-- **High** — Major feature broken, severe security issue
-- **Medium** — Feature partially broken, moderate security issue
-- **Low** — Minor issue, cosmetic problem
-
-**Routing:**
-- Critical/High defects block release
-- Route defects back to Sprint Coordinator for assignment
-- Track in defect log: `docs/qa/DEFECTS.md`
-- Retest after fix
-
-### Phase 8 Exit Criteria
-- All Critical/High defects resolved
-- Medium defects documented (fix or defer decision)
-- Security checklist 100% passed
-- Code review checklist passed
-- Performance benchmarks met
-- Test coverage targets achieved
-- RTM validated (all requirements tested)
-
-## QA Engineer Review
-
-### System Test Plan Execution
-
-**Test Scope:**
-- All user journeys from User Guide
-- Cross-feature integration scenarios
-- Error handling and edge cases
-- Data validation and integrity
-- System performance under load
-
-**Test Environment:**
-- Staging/QA environment matching production
-- Realistic test data
-- External service stubs/mocks if needed
-- Performance monitoring enabled
-
-**Test Documentation:**
-- Test execution log: `docs/qa/test-execution.md`
-- Defect reports: `docs/qa/DEFECTS.md`
-- Performance results: `docs/qa/performance-results.md`
-
-See: `references/performance-checklist.md`
-
-### Requirements Validation
-
-**Process:**
-1. Review Requirements Traceability Matrix
-2. For each requirement, verify:
-   - Implementation exists
-   - Tests exist and pass
-   - Functionality matches specification
-3. Update RTM with test results
-4. Flag untested or failed requirements
-
-### User Journey Validation
-
-**Process:**
-1. Review User Guide journeys
-2. Execute each journey step-by-step
-3. Validate expected outcomes
-4. Test error scenarios
-5. Document deviations
-
-## Security Reviewer Review
-
-### OWASP Top 10 Validation
-
-**2023 OWASP Top 10:**
-1. Broken Access Control
-2. Cryptographic Failures
-3. Injection
-4. Insecure Design
-5. Security Misconfiguration
-6. Vulnerable and Outdated Components
-7. Identification and Authentication Failures
-8. Software and Data Integrity Failures
-9. Security Logging and Monitoring Failures
-10. Server-Side Request Forgery (SSRF)
-
-See: `references/security-checklist.md`
-
-### Vulnerability Scanning
-
-**Tools:**
-- Dependency scanning: `npm audit`, `pip-audit`, OWASP Dependency-Check
-- SAST: SonarQube, Semgrep
-- DAST: OWASP ZAP, Burp Suite
-- Container scanning: Trivy, Snyk
-
-**Process:**
-1. Run automated scans
-2. Review findings by severity
-3. Validate true positives
-4. Create defects for confirmed issues
-5. Document false positives
-
-### Security Testing
-
-**Authentication:**
-- Test login/logout flows
-- Verify session management
-- Test password policies
-- Check MFA implementation
-
-**Authorization:**
-- Test role-based access control
-- Verify permission enforcement
-- Test privilege escalation attempts
-- Check API authorization
-
-**Input Validation:**
-- Test SQL injection
-- Test XSS attacks
-- Test command injection
-- Test path traversal
-- Test file upload restrictions
-
-See: `references/security-checklist.md`
-
-## Code Reviewer Review
-
-### Contract Compliance
-
-**Process:**
-1. Review API contracts in `docs/contracts/`
-2. Test API endpoints against contracts
-3. Validate request/response schemas
-4. Check error response formats
-5. Verify contract versioning
-
-### Code Quality Review
-
-**Review Focus:**
-- Code readability and maintainability
-- Design pattern adherence
-- DRY principle compliance
-- SOLID principle adherence
-- Error handling patterns
-- Logging and observability
-
-See: `references/code-review-checklist.md`
-
-### Test Coverage Analysis
-
-**Coverage Targets:**
-- Unit tests: 80%+ line coverage
-- Integration tests: Critical paths covered
-- E2E tests: Core user journeys covered
-
-**Process:**
-1. Run coverage reports
-2. Identify uncovered code
-3. Assess risk of uncovered areas
-4. Create defects for missing critical tests
-
-### Documentation Review
-
-**Validation:**
-- Code comments for complex logic
-- API documentation completeness
-- README accuracy
-- Architecture Decision Records
-- Deployment documentation
-
-## QA Review Deliverables
-
-**Required Outputs:**
-1. `docs/qa/test-execution.md` — Test execution summary
-2. `docs/qa/DEFECTS.md` — Defect log with severity
-3. `docs/qa/security-report.md` — Security scan results
-4. `docs/qa/code-review-summary.md` — Code review findings
-5. `docs/qa/QA-SIGN-OFF.md` — QA approval or block decision
 
 ## References
 

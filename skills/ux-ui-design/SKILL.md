@@ -9,11 +9,15 @@ Creates comprehensive user experience and interface design with unique, project-
 
 ## When to Use
 
-- Phase 6 UX/UI design in the orchestrator workflow
+- Phase 5 UX/UI design in the orchestrator workflow
 - User says "design the UI" or "create design system"
 - Need to create visual design and component specifications
 - Defining interaction patterns and user flows
 - Creating design system for developer implementation
+
+## External Design System Skills
+
+If a design system skill is available in the project (e.g., phozart-ui, phozart-design, phozart-console), treat it as the token foundation. The UX/UI design process focuses on layout, flows, and interaction patterns. The design system skill handles visual identity, spacing, and component styling. Do not duplicate or override design system tokens — extend them only when the project requires elements the system doesn't cover, and document the extension.
 
 ## What This Skill Does
 

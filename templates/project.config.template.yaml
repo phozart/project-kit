@@ -6,11 +6,11 @@ project:
 
 phases:
   innovation: false
-  marketing: false
   product_design: true
-  business_analysis: true
+  platform_foundation: true
   architecture: true
   ux_ui: true
+  marketing: false
   implementation: true
   qa_security: true
   release: true
@@ -21,11 +21,11 @@ gates:
   overrides:
     gate_0_setup: manual
     gate_1_innovation: auto
-    gate_2_product_design: auto
-    gate_3_marketing: skip
-    gate_4_requirements: auto
-    gate_5_architecture: auto
-    gate_6_design: auto
+    gate_2_product_design: manual
+    gate_3_platform_foundation: manual
+    gate_4_architecture: auto
+    gate_5_ux_ui_design: auto
+    gate_6_marketing: skip
     gate_7_implementation: auto
     gate_8_qa_security: auto
     gate_9_release: manual
@@ -85,3 +85,33 @@ sprints:
   current: 0
   features_in_progress: []
   features_completed: []
+
+context_management:
+  # Session boundary enforcement
+  session_per_task: true          # Recommend new session per task during BUILD
+  session_per_stage: true         # Recommend new session per work package stage
+  max_exchanges_per_session: 15   # Warn after this many exchanges in a single task
+
+  # What to load per session type
+  task_session_context:
+    - task_brief                  # docs/sprints/tasks/TASK-XXX.md
+    - implementation_thinking     # implementation-thinking skill (reference)
+    - technology_skill            # relevant tech skill (reference)
+    # NOT: other task briefs, previous task conversation, full architecture doc
+
+  test_session_context:
+    - work_package_brief          # docs/sprints/WP-XXX-brief.md
+    - test_commands               # how to run the test suite
+    # NOT: implementation conversation, task briefs, design docs
+
+  review_session_context:
+    - changed_files_list          # git diff --name-only for the work package
+    - implementation_notes        # TASK-XXX-notes.md for each task in WP
+    - review_checklist            # from qa-review skill
+    # NOT: build conversation, test output (unless test failures exist)
+
+  qa_session_context:
+    - work_package_brief          # docs/sprints/WP-XXX-brief.md with acceptance criteria
+    - task_briefs_edge_cases      # edge cases from task briefs
+    - qa_checklist                # from qa-review skill
+    # NOT: code review findings (resolved), build conversation

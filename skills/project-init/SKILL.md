@@ -106,8 +106,27 @@ gates:
 
 This project uses the **project-kit** orchestration workflow.
 - Run `/orchestrate` to continue from the current phase.
+- Run `/sync` to reconcile ad-hoc work back into the orchestration flow.
 - NEVER skip phases or gates without explicit user approval.
 - All project state lives in `project.config.yaml`. This file provides framing and summaries.
+
+## Guardian Behavior
+
+**IMPORTANT: This section applies to ALL interactions in this project, not just when `/orchestrate` is invoked.**
+
+Before executing any development task (code changes, file creation, architecture decisions, design work), you MUST:
+
+1. **Check phase context.** Read the Current State section below. If the requested work belongs to a phase that hasn't been reached yet, inform the user and ask whether to proceed ad-hoc or run `/orchestrate` to get there properly.
+2. **Flag drift.** If the user asks for work that would normally be handled by an orchestrated phase (e.g., writing components before implementation phase, making architecture decisions before architecture phase), note this at the start of your response: _"This work falls under Phase N (name). The project is currently at Phase M. Proceeding ad-hoc — run `/sync` when ready to reconcile, or `/orchestrate` to resume the full workflow."_
+3. **Track ad-hoc work.** When you do work outside orchestration, append it to the Ad-Hoc Log below so `/sync` can reconcile later.
+4. **Respect locked decisions.** Even in ad-hoc mode, never contradict decisions recorded in Key Decisions below or in PLATFORM-FOUNDATION.md.
+
+If the user's request is a simple question, explanation, or non-project task, skip the guardian check.
+
+<!-- DYNAMIC:ADHOC -->
+## Ad-Hoc Work Log
+_No ad-hoc work recorded._
+<!-- /DYNAMIC:ADHOC -->
 
 <!-- DYNAMIC:STATE -->
 ## Current State

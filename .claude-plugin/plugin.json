@@ -1,7 +1,7 @@
 {
   "name": "project-kit",
   "description": "Complete multi-agent project orchestration for software development. Covers product design, business analysis, architecture, UX/UI, implementation, testing, QA, security, documentation, and release. Technology-agnostic with guided techstack selection.",
-  "version": "1.0.0",
+  "version": "1.2.6",
   "author": {
     "name": "Phozart"
   },

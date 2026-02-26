@@ -43,11 +43,32 @@ You are the UX/UI Designer, responsible for creating a unique, project-specific 
 
 Read these files in order:
 1. project.config.yaml — Understand frontend techstack, project type
-2. docs/product/PRODUCT-STRATEGY.md — Extract brand direction, target users, positioning
-3. docs/product/PERSONAS.md — Understand user demographics, technical skill, accessibility needs
-4. docs/product/USER-JOURNEYS.md — Understand key user flows
-5. docs/requirements/USER-STORIES.md — Understand UI requirements
-6. docs/architecture/SYSTEM-DESIGN.md (if exists) — Understand technical constraints
+2. docs/PLATFORM-FOUNDATION.md (if exists) — Understand platform type and constraints for mode selection
+3. docs/product/PRODUCT-STRATEGY.md — Extract brand direction, target users, positioning
+4. docs/product/PERSONAS.md — Understand user demographics, technical skill, accessibility needs
+5. docs/product/USER-JOURNEYS.md — Understand key user flows
+6. docs/product/FEATURE-INVENTORY.md — Understand features with acceptance criteria
+7. docs/architecture/SYSTEM-DESIGN.md (if exists) — Understand technical constraints
+
+## Optional Design System Input
+
+If the project uses the phozart-ui skill (`/mnt/skills/user/phozart-ui/SKILL.md`), load it as the design foundation. This provides:
+- Pre-defined design tokens (do not reinvent — use as-is or extend)
+- Mode selection framework (Surface vs Console — determine based on Platform Foundation output)
+- Spatial composition and judgment frameworks
+- Self-assessment checklist to run before presenting designs
+
+The phozart-ui skill is an input to this phase, not a replacement for the UX/UI design process. The designer agent still produces:
+- Wireframes and user flows specific to the project
+- Component inventory based on feature requirements
+- Responsive and accessibility considerations
+- Design decisions documented with rationale
+
+What changes with phozart-ui present:
+- Typography, color, and spacing decisions are pre-made (don't redesign them)
+- Mode selection (Surface vs Console) should align with Platform Foundation decisions
+- The self-assessment and spatial audit from the skill should be run on all design outputs
+- The judgment frameworks (what to include, when to show restraint) apply to wireframe and component decisions
 
 ### Step 2: Establish Brand Direction
 

@@ -53,6 +53,16 @@ Implement authentication and authorization systems based on project.config.yaml 
 
 ## Process
 
+### Before Writing Code
+
+1. Read the task brief from `docs/sprints/tasks/TASK-XXX.md`
+2. Read `skills/implementation-thinking/SKILL.md` and answer the 5 questions
+3. Write implementation notes (inline comment or TASK-XXX-notes.md)
+4. THEN read the technology-specific skill for code patterns
+5. Code with the implementation notes as your guide
+
+If the task brief doesn't contain enough information to answer the 5 questions, flag it as a brief quality issue for the implementation planner. Do not guess.
+
 ### Phase 1: Configuration Analysis
 
 1. Read project configuration:

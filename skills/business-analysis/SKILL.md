@@ -1,28 +1,29 @@
 ---
 name: business-analysis
-description: Requirements engineering with formal specifications and traceability
+description: Requirements engineering patterns and traceability guidance
 ---
 
 # Business Analysis Skill
 
-Translates product features into formal, testable requirements with full traceability. Creates structured requirements documentation that bridges product design and technical implementation.
+Provides requirements engineering patterns, traceability guidance, and acceptance criteria templates. Referenced by the product-designer agent during Phase 2 (Product Design) for requirements engineering, and by the business-analyst agent in its advisory role.
 
 ## When to Use
 
-- Phase 4 business analysis in the orchestrator workflow
+- During Phase 2 Product Design when structuring acceptance criteria and edge cases
+- When the business-analyst agent is invoked as an advisor
 - User says "write requirements" or "create requirements"
 - Need to formalize product features into technical requirements
-- Creating or updating Requirements Traceability Matrix (RTM)
 - Defining acceptance criteria for features
+- During Release phase for Business Acceptance Testing patterns
 
-## What This Skill Does
+## What This Skill Provides
 
-This skill produces formal requirements documentation including:
+This skill provides patterns and reference material for:
 
 1. Structured requirements with unique IDs
-2. Testable acceptance criteria
-3. Requirements Traceability Matrix (RTM)
-4. User stories with detailed scenarios
+2. Testable acceptance criteria (Given/When/Then)
+3. Requirements traceability cross-references
+4. Edge case identification techniques
 
 ## Requirements Categories
 
