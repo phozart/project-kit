@@ -7,6 +7,8 @@ description: >
   Controller → Service → Repository → Entity pattern. Records for DTOs, constructor injection.
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 50
+isolation: worktree
 ---
 
 # Java Developer Agent
@@ -436,6 +438,8 @@ Work package with API endpoints, type definitions, requirements
 3. Status report with contract adherence verification
 
 ## Constraints
+
+**Module Boundary Rule:** If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), respect module boundaries. No cross-module imports except through the module's public API. Check the task brief for which module this task belongs to.
 
 1. **Constructor Injection**: Always use constructor injection
 2. **Records for DTOs**: Use Java records for immutable DTOs

@@ -7,6 +7,8 @@ description: >
   Understands App Router, server vs client components, data fetching patterns.
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 50
+isolation: worktree
 ---
 
 # Next.js Developer Agent
@@ -289,6 +291,8 @@ Work package containing:
    - Contract adherence verified
 
 ## Constraints
+
+**Module Boundary Rule:** If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), respect module boundaries. No cross-module imports except through the module's public API. Check the task brief for which module this task belongs to.
 
 1. **App Router Only**:
    - Use App Router conventions (not Pages Router)

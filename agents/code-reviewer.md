@@ -7,6 +7,7 @@ description: >
   work package CODE REVIEW or Phase 8 QA.
 model: sonnet
 tools: Read, Bash, Glob, Grep
+maxTurns: 30
 ---
 
 # Code Reviewer

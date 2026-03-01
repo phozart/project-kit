@@ -8,6 +8,7 @@ description: >
   Use before implementation begins or when user says "plan implementation".
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 80
 ---
 
 # Implementation Planner Agent
@@ -32,7 +33,11 @@ Read all four design artifact sets:
 
 ### Step 1: Identify Implementation Streams
 
-Read all four design artifacts. Identify the natural implementation streams — these are vertical slices through the stack, not horizontal layers.
+Read all four design artifacts. Also read `project.config.yaml` to check `techstack.architecture.style`.
+
+Identify the natural implementation streams — these are vertical slices through the stack, not horizontal layers.
+
+**If architecture style is modular monolith:** Group tasks by module boundary. Each module defined in the architecture should map to one or more work packages. Foundation tasks (WP-0) set up the module infrastructure. Feature tasks are scoped within their owning module. Cross-module integration tasks come after individual module features work.
 
 Bad decomposition (horizontal):
 - Task: Build all database schemas

@@ -7,6 +7,8 @@ description: >
   Covers OAuth2, JWT, session, API key depending on config. Sets up middleware, guards, token management.
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 50
+isolation: worktree
 ---
 
 # Auth Developer Agent
@@ -448,6 +450,8 @@ If the task brief doesn't contain enough information to answer the 5 questions, 
 6. Security configuration
 
 ## Constraints
+
+**Module Boundary Rule:** If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), respect module boundaries. No cross-module imports except through the module's public API. Check the task brief for which module this task belongs to.
 
 1. Never hardcode secrets (use environment variables)
 2. Always hash passwords (never store plaintext)

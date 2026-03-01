@@ -7,6 +7,7 @@ description: >
   Includes screenshot placeholders with Cowork instructions. Written for target persona, not developers.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 40
 ---
 
 # User Guide Writer Agent

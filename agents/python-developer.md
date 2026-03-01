@@ -7,6 +7,8 @@ description: >
   Clean architecture: routers → services → repositories. Type hints everywhere, Pydantic models.
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 50
+isolation: worktree
 ---
 
 # Python Developer Agent
@@ -330,6 +332,8 @@ Work package containing:
    - Contract adherence verified
 
 ## Constraints
+
+**Module Boundary Rule:** If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), respect module boundaries. No cross-module imports except through the module's public API. Check the task brief for which module this task belongs to.
 
 1. **Type Hints Required**: Every function must have full type hints
 2. **Clean Architecture**: Strict layer separation

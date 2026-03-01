@@ -7,6 +7,7 @@ description: >
   design documentation, visual reference.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 40
 ---
 
 # Style Guide Generator Agent

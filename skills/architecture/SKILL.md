@@ -63,6 +63,32 @@ Use Mermaid or similar for:
 
 **Output**: `docs/architecture/system-design.md`
 
+### 2.5. Apply Architecture Style
+
+Read `docs/PLATFORM-FOUNDATION.md` Decision 8 (Architecture Style) to determine the project's architecture style.
+
+**If Traditional Monolith:**
+- Design a layered architecture (controller → service → repository)
+- Organize by feature, not by technical layer
+- Reference: `references/system-design-patterns.md`
+
+**If Modular Monolith:**
+- Define module boundaries aligned with bounded contexts
+- Each module owns its domain logic, data schema, and internal API
+- Cross-module communication through defined interfaces or internal event bus
+- Reference: `references/modular-monolith-patterns.md`, `references/domain-driven-design.md`
+
+**If Microservices:**
+- Define service boundaries per bounded context
+- Design API gateway, inter-service communication, and service discovery
+- Plan distributed tracing and circuit breakers
+- Reference: `references/architecture-style-patterns.md`
+
+**If Serverless-First:**
+- Design event-driven architecture with function composition
+- Plan state management and orchestration
+- Reference: `references/architecture-style-patterns.md`
+
 ### 3. Create Architecture Decision Records
 
 For each significant architectural decision, create an ADR:
@@ -314,3 +340,6 @@ Before completing architecture:
 - [ADR Template](./references/adr-template.md)
 - [System Design Patterns](./references/system-design-patterns.md)
 - [Data Flow Patterns](./references/data-flow-patterns.md)
+- [Modular Monolith Patterns](./references/modular-monolith-patterns.md)
+- [Domain-Driven Design](./references/domain-driven-design.md)
+- [Architecture Style Patterns](./references/architecture-style-patterns.md)

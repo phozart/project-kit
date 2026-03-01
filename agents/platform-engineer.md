@@ -9,6 +9,7 @@ description: >
   "platform foundation".
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 60
 ---
 
 # Platform Engineer Agent
@@ -138,6 +139,18 @@ Rank the top 3 from:
 
 Lock: Top 3 with specific targets where possible (e.g., "P95 response time under 200ms for dashboard loads" not just "fast").
 
+### Decision 8: Architecture Style
+
+Ask: What architecture style best fits this product's scale, team, and evolution path?
+
+Options with implications:
+- **Traditional Monolith** — Single codebase, single deployment. Simplest to develop, test, and deploy. Good for small teams (1-3 devs), early-stage products, and projects where the domain is not yet well understood. Risk: becomes hard to maintain at ~50k+ LOC without internal discipline.
+- **Modular Monolith** — Single deployment unit with enforced internal module boundaries. Each module owns its domain logic, data, and internal API. Cross-module communication through defined interfaces. Provides microservices-like separation without network overhead. Good for teams of 2-8, products with clear domain boundaries, and projects that may need to extract services later.
+- **Microservices** — Independent services, independent deployment, independent scaling. Requires operational maturity (service mesh, distributed tracing, CI/CD per service). Good for large teams (8+), products with genuinely different scaling needs per component, and organizations with platform engineering capacity.
+- **Serverless-First** — Event-driven functions, pay-per-use, managed infrastructure. Good for event-driven workloads, low/spiky traffic patterns, and teams that want to minimize ops. Constraints: cold starts, vendor lock-in, limited execution time, harder local development.
+
+Lock: Architecture style, module boundary strategy (if modular monolith — by bounded context, by feature group, or by technical layer), inter-module communication pattern (synchronous calls, internal event bus, or both).
+
 ## Output
 
 Produce a single document: `docs/PLATFORM-FOUNDATION.md`
@@ -150,7 +163,8 @@ Structure:
 5. **Data Architecture** — Database, caching, real-time, search, integrations.
 6. **Deployment** — Container, CI/CD, environments.
 7. **Non-Functional Priorities** — Top 3 with targets.
-8. **Locked Decisions Summary** — Single table of every decision that is now fixed. Architecture phase works within these constraints, not around them.
+8. **Architecture Style** — Monolith, modular monolith, microservices, or serverless. Module boundary strategy if modular.
+9. **Locked Decisions Summary** — Single table of every decision that is now fixed. Architecture phase works within these constraints, not around them.
 
 This document should be short. Each section is a decision and its rationale, not an essay. Target: under 400 lines total.
 
@@ -173,7 +187,7 @@ Reading project context:
 - Type: [type from config]
 - Features: [count] features identified
 
-We need to lock [7] foundational decisions before architecture can begin.
+We need to lock [8] foundational decisions before architecture can begin.
 Starting with Decision 1: Platform Type.
 ```
 
@@ -191,13 +205,14 @@ Proceeding to Decision [N+1].
 ```
 Platform Foundation Complete
 
-All 7 decisions locked. Summary:
+All 8 decisions locked. Summary:
 - Platform: [type]
 - Auth: [pattern + provider]
 - Framework: [stack]
 - Database: [choice]
 - Deployment: [strategy]
 - Top priorities: [3 items]
+- Architecture style: [style + module strategy if applicable]
 
 Output: docs/PLATFORM-FOUNDATION.md
 Locked decisions: [count] entries in summary table

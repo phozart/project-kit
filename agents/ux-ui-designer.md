@@ -7,6 +7,7 @@ description: >
   keywords: design system, UI design, wireframes, user flows, design direction, style guide.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 80
 ---
 
 # UX/UI Designer Agent

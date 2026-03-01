@@ -7,6 +7,7 @@ description: >
   vague idea that needs validation.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 60
 ---
 
 # Innovation Strategist Agent

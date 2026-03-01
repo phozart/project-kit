@@ -13,7 +13,7 @@ Code recipe skills (React, Next.js, Python, Java, Database) tell you HOW to writ
 
 A filter component for a real-time operator dashboard and a filter component for a monthly reporting page use the same React patterns. But they have fundamentally different performance budgets, state management needs, interaction patterns, and failure modes. If you don't think about that before coding, you build the wrong thing correctly.
 
-## Process: 5 Questions Before Code
+## Process: 5 Questions Before Code (6 for Modular Monolith)
 
 For every task, answer these five questions by reading the task brief. Write the answers as a comment block at the top of the primary file you create, or as a brief `TASK-XXX-notes.md` if the answers influence multiple files. These notes are for the code reviewer and for your future self.
 
@@ -130,6 +130,17 @@ Common regrets:
 
 This question is a 30-second gut check. It catches the things that recipe book skills don't mention because they're context-dependent.
 
+### Question 6: Which Module Does This Belong To? (Modular Monolith Only)
+
+If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), answer this question before coding:
+
+- Which module owns this task's domain logic and data?
+- Does this task need to call another module's API? If so, use the module's public interface — never import internal classes.
+- Does this task produce domain events that other modules consume? If so, publish through the internal event bus.
+- Does this task need data owned by another module? Access it through the owning module's API, never through direct database queries.
+
+If the task brief doesn't specify the module, check the architecture documentation (SYSTEM-DESIGN.md) for module boundary definitions. If unclear, flag to the sprint coordinator as a blocker.
+
 ## Output: Implementation Notes
 
 Before writing code, produce a brief note (inline comment block or separate file):
@@ -159,6 +170,11 @@ Before writing code, produce a brief note (inline comment block or separate file
 // - Filter state shared with TASK-013 (dispatch detail) — use URL params
 // - Real-time updates from WebSocket established in WP-0 foundation
 //
+// MODULE (if modular monolith):
+// - Belongs to: dispatch module
+// - Calls: no cross-module calls needed
+// - Publishes: DispatchDelayDetected event (consumed by notification module)
+//
 // REGRET CHECK:
 // - Must add composite index in migration, not after
 // - Must preserve filter state in URL (operator shares links with team)
@@ -174,7 +190,7 @@ After writing implementation notes, THEN read the technology-specific skill (Rea
 
 Example flow:
 1. Read task brief -> understand what to build
-2. Read implementation-thinking skill -> answer 5 questions, write notes
+2. Read implementation-thinking skill -> answer 5 questions (6 if modular monolith), write notes
 3. Read implementation-react or implementation-nextjs skill -> choose code patterns that match the interaction pattern
 4. Code -> with the notes as your guide, not just the recipe
 

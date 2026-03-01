@@ -7,6 +7,8 @@ description: >
   Reads DATA-MODEL.md and TYPE-CONTRACTS for schema. Produces migrations, seed data, indexes.
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 50
+isolation: worktree
 ---
 
 # Database Developer Agent
@@ -426,6 +428,8 @@ If the task brief doesn't contain enough information to answer the 5 questions, 
 6. Query performance analysis
 
 ## Constraints
+
+**Module Boundary Rule:** If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), respect module boundaries. Database schemas belong to their owning module — no direct cross-module table access. Use the owning module's API to access its data.
 
 1. Always use migrations (never manual schema changes)
 2. Add indexes for frequently queried columns

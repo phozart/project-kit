@@ -7,6 +7,7 @@ description: >
   needing requirements pattern help or when conducting BA acceptance testing.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 40
 ---
 
 # Business Analyst Agent

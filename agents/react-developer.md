@@ -8,6 +8,8 @@ description: >
   no business logic in components. Follows design system exactly.
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 50
+isolation: worktree
 ---
 
 # React Developer Agent
@@ -214,6 +216,8 @@ Work package containing:
    - Any contract mismatches found (blockers)
 
 ## Constraints
+
+**Module Boundary Rule:** If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), respect module boundaries. No cross-module imports except through the module's public API. Check the task brief for which module this task belongs to.
 
 1. **Strict Enforcement**:
    - NO inline styles

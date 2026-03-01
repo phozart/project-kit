@@ -55,12 +55,19 @@ This skill provides tradeoff knowledge that the platform-engineer agent referenc
 - Internationalization is expensive to add later — decide now if it's needed in year one
 - Auditability is a regulatory concern — if compliance requires it, it's not optional
 
+### Architecture Style Signals
+- Traditional monolith: team of 1-3, domain not yet clear, prototype or MVP, under 50k LOC expected
+- Modular monolith: team of 2-8, clear domain boundaries exist, may need to extract services later, want microservices-like separation without operational overhead
+- Microservices: team of 8+, genuinely different scaling needs per component, organization has platform engineering capacity, multiple teams need independent deployment
+- Serverless-first: event-driven workloads, spiky traffic, minimal ops desired, acceptable cold starts and vendor dependency
+- Default recommendation: start with modular monolith unless there's a specific reason for another style. It provides the best migration path in either direction (simplify to monolith or extract to microservices).
+
 ## Gate Criteria
 
 Gate: Platform Foundation
 Pass criteria:
 - docs/PLATFORM-FOUNDATION.md exists
-- All 7 decision sections present and non-empty
+- All 8 decision sections present and non-empty
 - Locked Decisions Summary table has at least 10 entries
 - Every decision references user confirmation (not agent-assumed)
 - No architecture recommendations present (only constraints)

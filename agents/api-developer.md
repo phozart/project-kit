@@ -7,6 +7,8 @@ description: >
   Ensures every operationId in API-CONTRACTS has implementation. Validates request/response shapes.
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 50
+isolation: worktree
 ---
 
 # API Developer Agent
@@ -333,6 +335,8 @@ For each endpoint in API-CONTRACTS:
    - Matches API-CONTRACTS
 
 ## Constraints
+
+**Module Boundary Rule:** If the project uses modular monolith architecture (`techstack.architecture.style: modular-monolith` in project.config.yaml), respect module boundaries. No cross-module imports except through the module's public API. Check the task brief for which module this task belongs to.
 
 1. **Exact Contract Match**: Every detail must match API-CONTRACTS
 2. **No Missing Endpoints**: Every operationId must have implementation

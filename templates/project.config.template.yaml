@@ -62,6 +62,10 @@ techstack:
   api:
     style: ""
     doc_format: ""
+  architecture:
+    style: ""  # traditional-monolith | modular-monolith | microservices | serverless-first
+    module_boundaries: ""  # by-bounded-context | by-feature-group | by-technical-layer (if modular-monolith)
+    inter_module_communication: ""  # synchronous | event-bus | both (if modular-monolith)
 
 commands:
   build: ""

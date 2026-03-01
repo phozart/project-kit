@@ -7,6 +7,7 @@ description: >
   Triggered by keywords: architecture, ADR, contracts, system design, infrastructure.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 80
 ---
 
 # Solution Architect Agent
@@ -60,6 +61,31 @@ Include Mermaid diagrams for:
 - Component diagrams for major subsystems
 - Deployment diagram
 - Data flow diagram
+
+### Step 2.5: Apply Architecture Style from Platform Foundation
+
+Read Decision 8 (Architecture Style) from PLATFORM-FOUNDATION.md.
+
+**If Modular Monolith:**
+- Define module boundaries aligned with bounded contexts from the feature inventory
+- Each module owns: domain logic, data (schema or table prefix), internal API (service facade)
+- Cross-module communication: synchronous calls through module API for commands, internal event bus for reactions
+- Create an ADR documenting the module boundary decisions (ADR-XXX-module-boundaries.md)
+- Include a module dependency diagram in SYSTEM-DESIGN.md
+- Reference: architecture skill → modular-monolith-patterns.md, domain-driven-design.md
+
+**If Traditional Monolith:**
+- Design layered architecture organized by feature
+- No special module boundary enforcement needed
+
+**If Microservices:**
+- Define service boundaries per bounded context
+- Design inter-service communication (REST/gRPC/events)
+- Plan service mesh, API gateway, distributed tracing
+
+**If Serverless-First:**
+- Design event-driven function composition
+- Plan state management via step functions or event sourcing
 
 ### Step 3: Create Architecture Decision Records
 

@@ -5,6 +5,46 @@ All notable changes to the project-kit plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-03-01
+
+### Added — W1: Agent Plumbing
+- **Agent() tool** on project-lead and sprint-coordinator: orchestrators can now spawn specialist agents directly via the Agent tool instead of the removed Task tool. Includes agent routing allowlists.
+- **isolation: worktree** on all 7 developer agents (react-developer, nextjs-developer, python-developer, java-developer, api-developer, auth-developer, database-developer). Each developer agent works in an isolated git worktree to prevent file conflicts during parallel execution.
+- **maxTurns** on all 26 agents. Values calibrated by role: project-lead (200), sprint-coordinator (150), product-designer (100), developers (50), reviewers (30), documentation (40).
+- **sprint-coordination skill** with SKILL.md and 8 reference files: work-package-lifecycle.md, stage-transitions.md, context-isolation.md, session-management.md, blocker-resolution-protocol.md, progress-tracking.md, change-management.md, communication-protocol.md. Extracted from the 533-line sprint-coordinator agent body, which is now ~120 lines focused on routing decisions.
+
+### Added — W2: Modular Architecture
+- **Decision 8: Architecture Style** in Platform Foundation — new diagnostic question covering traditional monolith, modular monolith, microservices, and serverless-first. Platform engineer now locks 8 decisions (up from 7).
+- **modular-monolith-patterns.md** reference (~350 lines): module boundary definition, internal API contracts, data isolation strategies (schema-per-module), cross-module communication (sync + event bus), module testing strategy, migration path to microservices, decision matrix, anti-patterns.
+- **domain-driven-design.md** reference (~250 lines): strategic DDD (bounded contexts, context mapping), tactical DDD (entities, value objects, aggregates, domain events, repositories), domain event patterns, anti-corruption layers, practical application to project-kit.
+- **architecture-style-patterns.md** reference: decision tree for choosing patterns per architecture style with flowchart.
+- Solution architect updated: new Step 2.5 (Apply Architecture Style from Platform Foundation) with conditional guidance for each style.
+- Architecture skill updated: new step 2.5 and three new references.
+- **Module Boundary Rule** added to all 7 developer agents: enforces module boundaries when architecture style is modular-monolith.
+- **Question 6** added to implementation-thinking skill: "Which module does this belong to?" for modular monolith projects. Implementation notes example updated with MODULE section.
+- Implementation planner updated: groups tasks by module boundary for modular monolith projects.
+- Gate 4 (Architecture) criteria updated: checks architecture style alignment and module boundary definitions.
+- project.config.template.yaml: new `architecture` block (style, module_boundaries, inter_module_communication).
+
+### Added — W3: Agent Teams (Experimental)
+- **Agent Teams parallel execution** support in sprint-coordinator: experimental mode for running independent tasks in parallel. Requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` environment variable.
+- **agent-teams-parallel.md** reference: when to use teams, how parallel execution works, team composition patterns (frontend+backend, module-per-agent, feature-per-agent), merge strategy, limitations.
+- **team-composition.md** reference: parallelizability assessment, team patterns by work package type, team size guidelines, sequential fallback.
+- Phase 7 description in project-lead updated with dual-mode execution (sequential default, Agent Teams optional).
+
+### Changed
+- Sprint-coordinator agent refactored from 533 lines to ~120 lines. All process detail moved to sprint-coordination skill reference files.
+- "Task tool" references replaced with "Agent tool" across all agents and skills (project-lead, sprint-coordinator, docs-writer, product-designer).
+- Platform Foundation references updated from "7 decisions" to "8 decisions" throughout (platform-engineer, platform-foundation skill, project-lead).
+- Agent count unchanged at 26. Skill count: 23 → 24 (added sprint-coordination).
+
+### Design Rationale
+**W1 (Agent Plumbing):** The Task tool was removed from Claude Code; Agent() is the replacement. Adding maxTurns prevents runaway sessions. Worktree isolation enables safe parallel developer execution — each agent gets its own copy of the repository, eliminating file conflicts. Refactoring sprint-coordinator into a skill with references follows the same progressive disclosure pattern as other skills.
+
+**W2 (Modular Architecture):** Project Kit defaulted to unstructured monolith architecture. Many production systems benefit from enforced module boundaries — they provide microservices-like separation (owned data, internal APIs, domain events) without operational overhead. Adding modular monolith and DDD as first-class architectural options with guidance at every level (platform decision → architecture design → implementation planning → developer constraints → code review) ensures the pattern is consistently applied, not just named in an ADR.
+
+**W3 (Agent Teams):** Sequential task execution is safe but slow for large work packages with independent tasks. Agent Teams experimental support provides a parallel execution path for projects that need it, gated behind an environment variable to keep the default behavior unchanged. The worktree isolation from W1 is a prerequisite — without it, parallel agents would cause file conflicts.
+
 ## [1.2.6] - 2026-02-26
 
 ### Added

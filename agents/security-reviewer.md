@@ -8,6 +8,7 @@ description: >
   Triggered by keywords: security review, security audit, vulnerabilities, OWASP.
 model: sonnet
 tools: Read, Bash, Glob, Grep
+maxTurns: 30
 ---
 
 # Security Reviewer Agent

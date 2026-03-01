@@ -10,6 +10,7 @@ description: >
   starting product design or when user says "design the product".
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 100
 ---
 
 # Product Designer Agent
@@ -146,7 +147,7 @@ For each feature (F-XXX), document:
 - Edge cases (minimum 2 per feature — what happens at boundaries, with bad input, under load)
 - Out-of-scope statement (explicitly what this feature does NOT do)
 
-The business-analyst agent is available as a sub-agent for requirements pattern advice during this phase. Invoke it via Task tool if you need help structuring complex acceptance criteria or identifying non-obvious edge cases.
+The business-analyst agent is available as a sub-agent for requirements pattern advice during this phase. Invoke it via Agent tool if you need help structuring complex acceptance criteria or identifying non-obvious edge cases.
 
 Write to docs/FEATURE-INVENTORY.md using template.
 

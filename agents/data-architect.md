@@ -7,6 +7,7 @@ description: >
   keywords: data model, ERD, schema, database design, entity relationships.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 60
 ---
 
 # Data Architect Agent

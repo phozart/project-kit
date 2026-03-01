@@ -14,7 +14,7 @@ Claude Code sessions degrade as context grows. Research shows agents with more c
 Users inevitably drift into freeform chat during an active project — fixing a bug here, tweaking a component there — bypassing orchestration entirely. This produces useful work that exists outside the workflow. Project Kit's **Guardian Behavior** detects this drift in real-time, logs it, and the `/sync` command reconciles it back into the orchestrated state.
 
 ### The "implicit architecture" problem
-Without explicit platform decisions, the first implementation prompt becomes the architecture. Project Kit locks 7 foundational decisions (platform type, user model, auth strategy, framework, data layer, deployment model, NFRs) in Phase 3 before any design work begins. These locked decisions constrain all downstream agents — the architect can't contradict them, and neither can developers.
+Without explicit platform decisions, the first implementation prompt becomes the architecture. Project Kit locks 8 foundational decisions (platform type, user model, auth strategy, framework, data layer, deployment model, NFRs, architecture style) in Phase 3 before any design work begins. These locked decisions constrain all downstream agents — the architect can't contradict them, and neither can developers.
 
 ### The "everything looks like CRUD" problem
 Standard developer agents produce Controller/Service/Repository for every feature regardless of whether it's a monitoring dashboard, a data pipeline, or a search interface. Project Kit's Implementation Thinking skill forces a 5-question decision framework before writing code, with 7 interaction pattern cards that guide developers toward the right architectural pattern per feature.
@@ -144,6 +144,9 @@ claude plugin marketplace remove project-kit
 7. **Contract-driven development.** TYPE-CONTRACTS and API-CONTRACTS bind all implementation streams.
 8. **Platform decisions are locked before architecture.** Foundational choices (auth, database, framework, deployment) are confirmed with the user before any design work begins.
 9. **Guardian Behavior is always active.** Even outside `/orchestrate`, Claude checks phase context, flags drift, and logs ad-hoc work.
+10. **Developer agents run in isolated worktrees.** Each developer agent gets its own copy of the repository, enabling safe parallel execution without file conflicts.
+11. **All agents have turn limits.** maxTurns prevents runaway sessions. Calibrated by role complexity.
+12. **Modular architecture is a first-class option.** Platform Foundation Decision 8 locks the architecture style. Modular monolith, DDD patterns, and module boundary enforcement flow through all downstream phases.
 
 ## Guardian Behavior & Ad-Hoc Drift Detection
 
@@ -165,7 +168,7 @@ Run `/sync` at any time to reconcile ad-hoc work. When `/orchestrate` is invoked
 | 0 | Project Setup | — (command + skill) | Config exists, techstack defined | manual |
 | 1 | Innovation | innovation-strategist | Concept validated | auto |
 | 2 | Product Design | product-designer (+ business-analyst advisory) | Strategy, personas, features with acceptance criteria, edge cases, scope | manual |
-| 3 | Platform Foundation | platform-engineer | All 7 decisions locked with user confirmation | manual |
+| 3 | Platform Foundation | platform-engineer | All 8 decisions locked with user confirmation | manual |
 | 4 | Architecture | solution-architect, data-architect | System design, contracts generated (within Platform Foundation constraints) | auto |
 | 5 | UX/UI Design | ux-ui-designer | Design system, wireframes, flows | auto |
 | 6 | Marketing Research | marketing-researcher | Market sized, positioning defined | skip |
@@ -200,7 +203,7 @@ Phase 7 (Implementation) is two-stage: the planner sub-phase is manual (human re
 | innovation-strategist | Design thinking, feasibility, cross-domain innovation (optional phase) |
 | marketing-researcher | Market sizing, competitive analysis (optional phase) |
 
-### Developers (model: sonnet)
+### Developers (model: opus, isolation: worktree)
 | Agent | When Used |
 |-------|-----------|
 | react-developer | React components, hooks, state management |
@@ -227,7 +230,7 @@ Phase 7 (Implementation) is two-stage: the planner sub-phase is manual (human re
 | user-guide-writer | User guide with screenshot placeholders for Cowork |
 | release-manager | Changelog, deployment config, release notes |
 
-## Skills (23)
+## Skills (24)
 
 Skills provide domain knowledge that agents reference. Each skill has a concise `SKILL.md` (<200 lines) with detailed content in `references/` subdirectories.
 
@@ -255,6 +258,7 @@ Skills provide domain knowledge that agents reference. Each skill has a concise 
 | deployment | Deployment and CI/CD | Docker, CI/CD, env management |
 | documentation | Documentation package specs | style guide, dev guide, user guide |
 | sprint-management | Sprint coordination patterns | parallel work, blocker resolution |
+| sprint-coordination | Work package lifecycle, context isolation, session management | lifecycle, stage transitions, context isolation, sessions, blockers, progress, changes, communication |
 | architecture-maintenance | Living architecture updates | — |
 
 ## Commands (9)
@@ -412,6 +416,7 @@ project-kit/
     deployment/SKILL.md
     documentation/SKILL.md
     sprint-management/SKILL.md
+    sprint-coordination/SKILL.md
     architecture-maintenance/SKILL.md
   templates/                       # Document and config templates
     CLAUDE.template.md
@@ -472,6 +477,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full details. Key milestones:
 
 | Version | Date | Highlights |
 |---------|------|-----------|
+| 2.0.0 | 2026-03-01 | Agent() routing, worktree isolation, maxTurns, modular monolith + DDD, Agent Teams (experimental) |
 | 1.2.6 | 2026-02-26 | Guardian Behavior, `/sync` command, ad-hoc drift detection |
 | 1.2.5 | 2026-02-26 | Session management, context isolation, session break instructions |
 | 1.2.4 | 2026-02-26 | Testing rewrite (acceptance-criteria-first), two-level QA |

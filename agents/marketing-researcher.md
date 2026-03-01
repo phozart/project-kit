@@ -7,6 +7,7 @@ description: >
   when market understanding is needed.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 40
 ---
 
 # Marketing Researcher Agent

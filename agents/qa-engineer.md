@@ -7,6 +7,7 @@ description: >
   integration test, E2E test, test plan, data quality.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 30
 ---
 
 # QA Engineer Agent

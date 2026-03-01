@@ -7,6 +7,7 @@ description: >
   Triggered by keywords: dev guide, developer documentation, technical documentation.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 40
 ---
 
 # Developer Guide Generator Agent

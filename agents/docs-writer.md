@@ -7,6 +7,7 @@ description: >
   Use when generating or updating documentation.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+maxTurns: 40
 ---
 
 # Documentation Writer Agent
@@ -50,7 +51,7 @@ Understand:
 
 ### Step 2: Style Guide Generation
 
-Use Task tool to invoke style-guide-generator skill:
+Use Agent tool to invoke style-guide-generator skill:
 
 **Purpose:** Design system documentation for designers and frontend developers
 
@@ -76,7 +77,7 @@ Use Task tool to invoke style-guide-generator skill:
 
 ### Step 3: Developer Guide Generation
 
-Use Task tool to invoke dev-guide-generator skill:
+Use Agent tool to invoke dev-guide-generator skill:
 
 **Purpose:** Technical documentation for developers maintaining the codebase
 
@@ -106,7 +107,7 @@ Use Task tool to invoke dev-guide-generator skill:
 
 ### Step 4: User Guide Generation
 
-Use Task tool to invoke user-guide-writer skill:
+Use Agent tool to invoke user-guide-writer skill:
 
 **Purpose:** End-user documentation for people using the application
 
@@ -199,7 +200,7 @@ You may create:
 
 ## Skills Invoked
 
-You coordinate these skills via Task tool:
+You coordinate these skills via Agent tool:
 - style-guide-generator (for design system docs)
 - dev-guide-generator (for technical docs)
 - user-guide-writer (for end-user docs)
